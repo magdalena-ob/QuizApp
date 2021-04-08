@@ -14,7 +14,8 @@ body {
     display: flex;
     position: relative;
     height: 500px;
-    width: 1500px;
+    width: 800px;
+    background-color:#f7f7f7 !important;
 }
 
 .sidebar {
@@ -68,5 +69,35 @@ body {
 }
 
 .quiz {
-    background-color: white;
+    margin-left: 136px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+.bg-img {
+    z-index: 1;
+}
+
+.bg-img img{
+    object-fit: contain;
+    width: 500px;
+}
+
+.html-quiz {
+    z-index: 2;
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 24px;
 }
