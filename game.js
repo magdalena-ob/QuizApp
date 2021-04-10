@@ -76,9 +76,20 @@ function updateHTMLQuiz() {
 function startHTMLQuiz() {
     document.getElementById('quiz').innerHTML = '';
 
-    let question = allQuestions[currentQuestion];
-    document.getElementById('quiz').innerHTML += showQuestion(question);
-    document.getElementById('quiz').innerHTML += showAnswer(question);
+    if (currentQuestion >= allQuestions.length) {
+        showEndOfGame();
+    } else {
+
+        let question = allQuestions[currentQuestion];
+        document.getElementById('quiz').innerHTML += showQuestion(question);
+        document.getElementById('quiz').innerHTML += showAnswer(question);
+        document.getElementById('quiz').innerHTML += `
+    <div class="back-and-forth">
+        <button class="rounded-circle circle" onclick="previousQuestion()"><img src="icon/left-arrow.png"></button>
+        <button class="rounded-circle circle" id="next-button" disabled onclick="nextQuestion()"><img src="icon/right-arrow.png"></button>
+    </div>
+    `;
+    }
 }
 
 function showQuestion(question) {
@@ -110,14 +121,40 @@ function showAnswer(question) {
 
 function answer(selection) {
     let question = allQuestions[currentQuestion];
-    console.log('selected number is ', selection);
-    console.log('right answer is ', question['right_answer']);
+    let idOfRightAnswer = question['right_answer'];
 
     if (selection == question['right_answer']) {
         document.getElementById(selection).classList.add('bg-right-answer-1');
-        document.getElementById(selection).firstElementChild.classList.add('bg-right-anser-2');
+        document.getElementById(selection).firstElementChild.classList.add('bg-right-answer-2');
     } else {
         document.getElementById(selection).classList.add('bg-wrong-answer-1');
-        document.getElementById(selection).firstElementChild.classList.add('bg-wrong-anser-2');
+        document.getElementById(selection).firstElementChild.classList.add('bg-wrong-answer-2');
+        document.getElementById(idOfRightAnswer).classList.add('bg-right-answer-1');
+        document.getElementById(idOfRightAnswer).firstElementChild.classList.add('bg-right-answer-2');
     }
+    document.getElementById('next-button').disabled = false;
+}
+
+function nextQuestion() {
+    currentQuestion++;
+    startHTMLQuiz();
+}
+
+function previousQuestion() {
+    if (currentQuestion > 0) {
+        currentQuestion--;
+    }
+    startHTMLQuiz();
+}
+
+function showEndOfGame() {
+    document.getElementById('quiz').innerHTML += `
+    <div class="rounded-circle finish-circle">
+        <div><img src="img/Group 5.png"></div>
+        <div><b>COMPLETE <br> HTML QUIZ</b></div>
+        <div class="score"><b>YOUR SCORE</b></div>
+        <div><button class="share-btn">SHARE</button></div>
+        <div class="replay-btn">REPLAY</div> 
+    </div>
+    `;
 }
