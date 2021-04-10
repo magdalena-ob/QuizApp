@@ -1,10 +1,10 @@
 body {
-    background-color: #ebe1fe !important;
+    background-color: #eee9f8a6 !important;
 }
 
 .container {
     min-height: 100vh;
-    background-color: #ede3ffb3 !important;
+   /* background-color: #eee9f8a6 !important;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,11 +61,13 @@ body {
     width: 100%;
     text-align: center;
     cursor: pointer;
+    transition: all 225ms ease-in-out;
 }
 
 .menu-btn:hover {
     border-left: 4px solid white;
     color: white;
+    transition: all 225ms ease-in-out;
 }
 
 .quiz {
@@ -75,6 +77,7 @@ body {
     align-items: center;
     height: 100vh;
     position: relative;
+    flex-direction: column;
 }
 
 .bg-img {
@@ -100,4 +103,53 @@ body {
     text-align: center;
     font-family: 'PT Sans', sans-serif;
     font-size: 24px;
+}
+
+.start-btn {
+    position: absolute;
+    bottom: 100px;
+}
+
+.question {
+    font-family: 'Rubik', sans-serif; 
+}
+
+.answer {
+    background-color: white;
+    width: 360px;
+    height: 56px;
+    margin: 16px;
+    display: flex;
+    align-items: center;
+    font-family: 'Rubik', sans-serif;
+    cursor: pointer;
+}
+
+.answer-choice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(217 211 211);
+    height: 40px;
+    width: 40px;
+    margin: 8px;
+    margin-right: 32px;
+}
+
+.bg-right-answer-1 {
+    background-color:#a8f977b5;;
+}
+
+.bg-right-anser-2 {
+    background-color: #22bf11;
+    color: white;
+}
+
+.bg-wrong-answer-1 {
+    background-color:#f29d9d;
+}
+
+.bg-wrong-anser-2 {
+    background-color: rgb(255 0 0);
+    color: white;
 }
