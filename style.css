@@ -217,6 +217,15 @@ body {
     top: 0;
     left: 0;
     right: 0;
+    background-color: #b2b4b5 !important;
+    height: 0.8rem !important;
+    border-radius: 0 !important;
+}
+
+.blue-bar {
+    background-color: #0a58ca !important;
+    border-top-right-radius: 1.25rem;
+    border-bottom-right-radius: 1.25rem;
 }
 
 .footer {
