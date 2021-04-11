@@ -58,6 +58,10 @@ let allQuestions = [
 ];
 
 let currentQuestion = 0;
+let rightQuestions = 0;
+let progress = 0;
+let AUDIO_SUCCESS = new Audio('audio/success.mp3');
+let AUDIO_FAIL = new Audio('audio/fail.mp3');
 
 function updateHTMLQuiz() {
     document.getElementById('quiz').innerHTML += `
@@ -75,8 +79,9 @@ function updateHTMLQuiz() {
 
 function startHTMLQuiz() {
     document.getElementById('quiz').innerHTML = '';
+    document.getElementById('progress-container').classList.remove('d-none');
 
-    if (currentQuestion >= allQuestions.length) {
+    if (gameIsOver()) {
         showEndOfGame();
     } else {
 
@@ -90,6 +95,10 @@ function startHTMLQuiz() {
     </div>
     `;
     }
+}
+
+function gameIsOver() {
+    return currentQuestion >= allQuestions.length;
 }
 
 function showQuestion(question) {
@@ -124,20 +133,23 @@ function answer(selection) {
     let idOfRightAnswer = question['right_answer'];
 
     if (selection == question['right_answer']) {
+        rightQuestions++;
         document.getElementById(selection).classList.add('bg-right-answer-1');
         document.getElementById(selection).firstElementChild.classList.add('bg-right-answer-2');
+        AUDIO_SUCCESS.play();
     } else {
         document.getElementById(selection).classList.add('bg-wrong-answer-1');
         document.getElementById(selection).firstElementChild.classList.add('bg-wrong-answer-2');
         document.getElementById(idOfRightAnswer).classList.add('bg-right-answer-1');
         document.getElementById(idOfRightAnswer).firstElementChild.classList.add('bg-right-answer-2');
+        AUDIO_FAIL.play();
     }
     document.getElementById('next-button').disabled = false;
 }
 
 function nextQuestion() {
     currentQuestion++;
-    startHTMLQuiz();
+    updateProgressBar();
 }
 
 function previousQuestion() {
@@ -147,14 +159,28 @@ function previousQuestion() {
     startHTMLQuiz();
 }
 
+function updateProgressBar() {
+    progress = Math.round((currentQuestion / allQuestions.length) * 100);
+    document.getElementById('progress-bar').style.width = progress + '%';    
+    startHTMLQuiz();
+}
+
 function showEndOfGame() {
     document.getElementById('quiz').innerHTML += `
     <div class="rounded-circle finish-circle">
         <div><img src="img/Group 5.png"></div>
         <div><b>COMPLETE <br> HTML QUIZ</b></div>
-        <div class="score"><b>YOUR SCORE</b></div>
+        <div class="score"><b>YOUR SCORE ${rightQuestions}/${allQuestions.length}</b></div>
         <div><button class="share-btn">SHARE</button></div>
-        <div class="replay-btn">REPLAY</div> 
+        <div class="replay-btn" onclick="restartHTMLQuiz()">REPLAY</div>
     </div>
     `;
+}
+
+function restartHTMLQuiz() {
+    rightQuestions = 0;
+    currentQuestion = 0;
+    progress = 0;
+    document.getElementById('progress-bar').style.width = progress + '%'; //progress-bar zurück setzen
+    startHTMLQuiz();
 }

@@ -167,6 +167,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    border: none;
 }
 
 .circle img {
@@ -208,4 +209,31 @@ body {
 .replay-btn {
     color: #ff592b;
     margin-bottom: 24px;
+    cursor: pointer;
+}
+
+.bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.footer {
+    position: absolute;
+    bottom: 24px;
+}
+.footer a {
+    color: #97b0d3;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: white;
+}
+
+.credits {
+    font-family: 'Rubik', sans-serif; 
+    margin-top: 48px;
+    margin-left: 156px;
 }
